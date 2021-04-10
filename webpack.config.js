@@ -5,11 +5,13 @@ module.exports = {
   name: 'webpack-config',
   mode: 'development',
   devtool: 'eval',
-  entry: './src/index.js',
+  entry: {
+    app : './src/index.js'
+  },
   resolve: { extensions: ['.js', '.jsx', '.json'] },
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: 'index_bundle.js'
+    filename: '[name].bundle.js'
   },
   module: {
     rules: [
