@@ -1,17 +1,35 @@
 {
   "name": "react_webpack_template",
   "version": "1.0.0",
+  "license": "MIT",
+  "author": "Ji Yeon Park <jyp933@gmail.com>",
   "description": "Create My Own React Webpack Template",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --env development",
+    "prebuild": "rimraf dist",
+    "build": "webpack --progress --mode production"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "html-webpack-plugin": "^5.3.1",
+    "rimraf": "^3.0.2",
+    "webpack": "^5.31.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gparkkii/react_webpack_template.git"
   },
-  "author": "Ji Yeon Park <jyp933@gmail.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/gparkkii/react_webpack_template/issues"
   },
