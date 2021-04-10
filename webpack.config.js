@@ -1,6 +1,7 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   name: 'webpack-config',
@@ -26,10 +27,28 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    historyApiFallback: true,
+    port: 8080,
+    contentBase: path.join(__dirname, '/dist'),  // contentBase는 output.path와 동일해야한다.
+    proxy: {
+      '/api/': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+      },
+    },
+    index: 'index.html',
+    open: true,
+    hot: true,
+    compress: true,
+    inline: true,
+    overlay: true,
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html'
     }),
-    new CleanWebpackPlugin(['dist'])
+    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
   ]
 }
