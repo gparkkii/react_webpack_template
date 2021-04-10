@@ -12,7 +12,14 @@ module.exports = {
     app : './src/index.js'
   },
   resolve: { 
-    extensions: ['.js', '.jsx', '.json'],
+    modules: [path.resolve(__dirname, './src'), 'node_modules'],
+    extensions: ['.js', '.jsx', '.json', 'css'],
+    alias: {
+      '@components': path.resolve(__dirname, './src/components'),
+      '@pages': path.resolve(__dirname, './src//pages'),
+      '@styles': path.resolve(__dirname, './src/styles'),
+      '@assets': path.resolve(__dirname, './src/'),
+    },
   },
   output: {
     path: path.join(__dirname, '/dist'),
@@ -61,6 +68,11 @@ module.exports = {
         }
       },
     ]
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
