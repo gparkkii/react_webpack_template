@@ -1,0 +1,19 @@
+{
+  "name": "react_webpack_template",
+  "version": "1.0.0",
+  "description": "Create My Own React Webpack Template",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gparkkii/react_webpack_template.git"
+  },
+  "author": "Ji Yeon Park <jyp933@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gparkkii/react_webpack_template/issues"
+  },
+  "homepage": "https://github.com/gparkkii/react_webpack_template#readme"
+}
