@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <StyledFooter>
       <a
-        href="https://github.com/gparkkii/react_webpack_template"
+        href="https://github.com/gparkkii"
         target="_blank"
         rel="noreferrer noopener"
       >
@@ -50,7 +50,7 @@ const StyledFooter = styled.footer`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 60px;
+  height: 80px;
   padding: 0px 24px;
   font-size: 14px;
   color: #999;

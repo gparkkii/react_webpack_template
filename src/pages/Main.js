@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { FlexContainer } from 'styles/container/styles';
+import { spinReverse, spin } from 'styles/keyframes';
 import ReactIcon from 'assets/react.png';
 import WebpackIcon from 'assets/webpack.png';
 
@@ -11,7 +12,13 @@ const Main = () => {
         <ReactImg src={ReactIcon} alt="webpack" />
         <WebpackImg src={WebpackIcon} alt="react" />
         <br /> Webpack으로 React.js 빌드하기
-        <p>© gparkkii : build react with webpack</p>
+        <a
+          href="https://github.com/gparkkii/react_webpack_template"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <p>© gparkkii : build react with webpack</p>
+        </a>
       </MainTitle>
     </FlexContainer>
   );
@@ -32,8 +39,13 @@ const MainTitle = styled.h2`
 
 const ReactImg = styled.img`
   width: 148px;
+  margin-left: -10px;
+  transition: 0.5s all linear;
+  animation: ${spinReverse} 15s linear infinite;
 `;
 
 const WebpackImg = styled.img`
   width: 108px;
+  transition: 0.5s all linear;
+  animation: ${spin} 15s linear infinite;
 `;

@@ -26,7 +26,7 @@ export const FlexContainer = styled.div`
   transition: all 0.2s;
 
   width: calc(100%-2rem);
-  height: calc(100vh - 120px);
+  height: calc(100vh - 140px);
 
   /* height: calc(100vh - (header + footer height)); */
 

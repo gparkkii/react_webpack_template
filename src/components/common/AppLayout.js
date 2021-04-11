@@ -19,5 +19,5 @@ const WrapContainer = styled.main`
   min-height: 100%;
   position: relative;
   padding-top: 60px;
-  padding-bottom: 60px;
+  padding-bottom: 80px;
 `;
