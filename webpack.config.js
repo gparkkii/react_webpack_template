@@ -9,21 +9,21 @@ module.exports = {
   mode: 'development',
   devtool: 'eval',
   entry: {
-    app : './src/index.js'
+    app: './src/index.js',
   },
-  resolve: { 
+  resolve: {
     modules: [path.resolve(__dirname, './src'), 'node_modules'],
     extensions: ['.js', '.jsx', '.json', 'css'],
     alias: {
-      '@components': path.resolve(__dirname, './src/components'),
-      '@pages': path.resolve(__dirname, './src//pages'),
-      '@styles': path.resolve(__dirname, './src/styles'),
-      '@assets': path.resolve(__dirname, './src/'),
+      components: path.resolve(__dirname, 'src/components'),
+      pages: path.resolve(__dirname, 'src/pages'),
+      styles: path.resolve(__dirname, 'src/styles'),
+      assets: path.resolve(__dirname, 'src/assets'),
     },
   },
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
   },
   module: {
     rules: [
@@ -34,7 +34,10 @@ module.exports = {
           presets: ['@babel/preset-env', '@babel/preset-react'],
           env: {
             development: {
-              plugins: [['@emotion', { sourceMap: true }], require.resolve('react-refresh/babel')],
+              plugins: [
+                ['@emotion', { sourceMap: true }],
+                require.resolve('react-refresh/babel'),
+              ],
             },
             production: {
               plugins: ['@emotion'],
@@ -56,18 +59,18 @@ module.exports = {
           options: {
             name: '[name].[ext]?[hash]',
             limit: 25000,
-          }
-        }
+          },
+        },
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
         exclude: /node_modules/,
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]',
-        }
+        },
       },
-    ]
+    ],
   },
   optimization: {
     splitChunks: {
@@ -87,7 +90,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     port: 8080,
-    contentBase: path.join(__dirname, '/dist'),  // contentBase는 output.path와 동일해야한다.
+    contentBase: path.join(__dirname, '/dist'), // contentBase는 output.path와 동일해야한다.
     proxy: {
       '/api/': {
         target: 'http://localhost:8080',
@@ -101,4 +104,4 @@ module.exports = {
     inline: true,
     overlay: true,
   },
-}
+};

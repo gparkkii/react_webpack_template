@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import loadable from '@loadable/component';
 
-const Main = loadable(() => import('@pages/Main.js'));
+const Main = loadable(() => import('pages/Main.js'));
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         </Switch>
       </Suspense>
     </Router>
-  )
+  );
 }
 
 export default App;
