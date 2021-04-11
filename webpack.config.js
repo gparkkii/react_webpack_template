@@ -7,7 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   name: 'webpack-config',
   mode: 'development',
-  devtool: 'eval',
+  devtool: 'inline-source-map',
   entry: {
     app: './src/index.js',
   },
@@ -57,24 +57,30 @@ module.exports = {
         use: {
           loader: 'url-loader',
           options: {
-            name: '[name].[ext]?[hash]',
+            name: 'assets/[name].[ext]?[hash]',
             limit: 25000,
           },
         },
       },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
-        exclude: /node_modules/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]',
-        },
-      },
+      // {
+      //   test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
+      //   exclude: /node_modules/,
+      //   loader: 'file-loader',
+      //   options: {
+      //     name: 'assets/[name].[ext]?[hash]',
+      //   },
+      // },
     ],
   },
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
     },
   },
   plugins: [
