@@ -6,9 +6,11 @@
 [![LastCommit](https://img.shields.io/github/last-commit/gparkkii/react_webpack_template)](https://github.com/gparkkii/react_webpack_template)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgparkkii%2Freact_webpack_template&count_bg=%23FF8500&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://github.com/gparkkii/react_webpack_template)
 
+<br/>
+
 ## 📝 Intro
 
-> Wepack 으로 React.js 개발환경 build하기
+Wepack 으로 React.js 개발환경 build하기
 
 <br/>
 
@@ -49,14 +51,10 @@ $> npm start
 
 ## 📍 Need To Develop
 
-```text
-
-- Production mode config
+- ~~Production mode config~~
 - add chunk config
 - storybook
 - workbook.md
-
-```
 
 <br/>
 

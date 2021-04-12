@@ -7,9 +7,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --env development",
+    "start": "cross-env webpack serve --env development",
     "prebuild": "rimraf dist",
-    "build": "webpack --progress --mode production"
+    "build": "cross-env NODE_ENV=production webpack"
   },
   "dependencies": {
     "@emotion/babel-plugin": "^11.3.0",
@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.3.0",
     "@loadable/component": "^5.14.1",
     "axios": "^0.21.1",
+    "cross-env": "^7.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0"

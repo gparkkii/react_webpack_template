@@ -2,12 +2,15 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-module.exports = {
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
+const config = {
   name: 'webpack-config',
-  mode: 'development',
-  devtool: ' eval-source-map',
+  mode: isDevelopment ? 'development' : 'production',
+  devtool: isDevelopment ? 'eval-cheap-source-map' : 'hidden-source-map',
   entry: {
     app: './src/index.js',
   },
@@ -84,14 +87,9 @@ module.exports = {
     },
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-      favicon: './public/favicon.png',
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: isDevelopment ? 'development' : 'production',
     }),
-    new CleanWebpackPlugin(),
-    new ReactRefreshWebpackPlugin(),
-    new webpack.ProgressPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
     historyApiFallback: true,
@@ -111,3 +109,32 @@ module.exports = {
     overlay: true,
   },
 };
+
+if (isDevelopment && config.plugins) {
+  config.plugins.push(new webpack.HotModuleReplacementPlugin());
+  config.plugins.push(new ReactRefreshWebpackPlugin());
+  config.plugins.push(new CleanWebpackPlugin());
+  config.plugins.push(new webpack.ProgressPlugin());
+  config.plugins.push(
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      favicon: './public/favicon.png',
+    }),
+  );
+  config.plugins.push(
+    new BundleAnalyzerPlugin({ analyzerMode: 'server', openAnalyzer: true }),
+  );
+}
+if (!isDevelopment && config.plugins) {
+  config.plugins.push(new webpack.LoaderOptionsPlugin({ minimize: true }));
+  config.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'static' }));
+  config.plugins.push(new CleanWebpackPlugin());
+  config.plugins.push(
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      favicon: './public/favicon.png',
+    }),
+  );
+}
+
+module.exports = config;
