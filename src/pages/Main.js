@@ -38,14 +38,15 @@ const MainTitle = styled.h2`
 `;
 
 const ReactImg = styled.img`
-  width: 148px;
-  margin-left: -10px;
+  width: 108px;
+  margin: 0px 5px;
   transition: 0.5s all linear;
   animation: ${spinReverse} 15s linear infinite;
 `;
 
 const WebpackImg = styled.img`
   width: 108px;
+  margin: 0px 5px;
   transition: 0.5s all linear;
   animation: ${spin} 15s linear infinite;
 `;

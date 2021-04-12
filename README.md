@@ -52,7 +52,7 @@ $> npm start
 ## 📍 Need To Develop
 
 - ~~Production mode config~~
-- add chunk config
+- ~~add chunk config~~
 - storybook
 - workbook.md
 

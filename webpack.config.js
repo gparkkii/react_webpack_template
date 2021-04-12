@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -26,7 +27,7 @@ const config = {
   },
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: '[name].bundle.js',
+    filename: isDevelopment ? '[name].[chunkhash].js' : '[name].bundle.js',
   },
   module: {
     rules: [
@@ -46,16 +47,22 @@ const config = {
               plugins: ['@emotion'],
             },
           },
-          plugins: ['react-refresh/babel'],
+          plugins: [
+            'react-refresh/babel',
+            '@babel/plugin-syntax-dynamic-import',
+          ],
         },
         exclude: path.join(__dirname, 'node_modules'),
       },
       {
         test: /\.css?$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          !isDevelopment ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+        ],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
+        test: /\.(ico|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         exclude: /node_modules/,
         use: {
           loader: 'url-loader',
@@ -65,14 +72,6 @@ const config = {
           },
         },
       },
-      // {
-      //   test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
-      //   exclude: /node_modules/,
-      //   loader: 'file-loader',
-      //   options: {
-      //     name: 'assets/[name].[ext]?[hash]',
-      //   },
-      // },
     ],
   },
   optimization: {
@@ -85,6 +84,7 @@ const config = {
         },
       },
     },
+    removeEmptyChunks: true,
   },
   plugins: [
     new webpack.EnvironmentPlugin({
@@ -97,7 +97,7 @@ const config = {
     contentBase: path.join(__dirname, '/dist'), // contentBase는 output.path와 동일해야한다.
     proxy: {
       '/api/': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:8080', // 서버 주소 넣기
         changeOrigin: true,
       },
     },
@@ -107,6 +107,7 @@ const config = {
     compress: true,
     inline: true,
     overlay: true,
+    stats: 'errors-only',
   },
 };
 
@@ -129,6 +130,9 @@ if (!isDevelopment && config.plugins) {
   config.plugins.push(new webpack.LoaderOptionsPlugin({ minimize: true }));
   config.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'static' }));
   config.plugins.push(new CleanWebpackPlugin());
+  config.plugins.push(
+    new MiniCssExtractPlugin({ filename: 'styles/[name].css' }),
+  );
   config.plugins.push(
     new HtmlWebpackPlugin({
       template: './public/index.html',
